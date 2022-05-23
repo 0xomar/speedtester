@@ -17,20 +17,22 @@ best_server = wifi.get_best_server() # get best server
 print(f"Found the best sever at: {best_server['host']} located in {best_server['country']}")
 
 print("Performing download speed test...")
-download_speed = wifi.download()
+download_speed = wifi.download() # a function to get the download speed
 
 
 print("Performing upload speed test...")
-upload_speed = wifi.upload()
+upload_speed = wifi.upload() # a function to get the upload speed
 
 print("Performing ping test...")
-ping_result = wifi.results.ping
+ping_result = wifi.results.ping # to get the ping results 
 
 
-print(f"\nDownload speed:, {download_speed / 1024 / 1024:.2f} Mbps")
+print(f"\nDownload speed:, {download_speed / 1024 / 1024:.2f} Mbps") # divid result by 1024 twice to get mega bit per second
 
 
-print(f"\nUpload speed:, {upload_speed / 1024 / 1024:.2f} Mbps")
+print(f"\nUpload speed:, {upload_speed / 1024 / 1024:.2f} Mbps") # divid result by 1024 twice to get mega bit per second
 
 
-print(f"\nPing result:, {ping_result:.2f} ms")
+print(f"\nPing result:, {ping_result:.2f} ms") # have the .2 floor to ONLY two decimals at the .
+
+
