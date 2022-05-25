@@ -2,7 +2,7 @@
 import speedtest
 import schedule
 from contextlib import redirect_stdout
-from time import time, sleep
+import time
 from datetime import datetime
 
 
@@ -38,10 +38,8 @@ print(f"\nUpload speed: {upload_speed / 1024 / 1024:.2f} Mbps") # divid result b
 
 print(f"\nPing result: {ping_result:.2f} ms") # have the .2 floor to ONLY two decimals at the .
 
-def script_report():
+def report_to_db():
     while True:
-        #sleep(60 - time() % 60) #  sleep(60 - time() % 60)
-
         with open('out.txt', 'a') as f:
             upload_speed = wifi.upload() # a function to get the upload speed
             download_speed = wifi.download() # a function to get the download speed
@@ -50,8 +48,8 @@ def script_report():
             with redirect_stdout(f):
                 print(f"\nDate and Time: {dt_string} | Download speed: {download_speed / 1024 / 1024:.2f} Mbps | Upload speed: {upload_speed / 1024 / 1024:.2f} Mbps") # divid result by 1024 twice to get mega bit per second
 
-schedule.every(2).hours.do(script_report)
+schedule.every(2).hours.do(report_to_db)
 
 while 1:
     schedule.run_pending()
-    
+    time.sleep(1)
