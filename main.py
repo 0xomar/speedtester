@@ -38,18 +38,23 @@ print(f"\nUpload speed: {upload_speed / 1024 / 1024:.2f} Mbps") # divid result b
 
 print(f"\nPing result: {ping_result:.2f} ms") # have the .2 floor to ONLY two decimals at the .
 
-def report_to_db():
-    while True:
-        with open('out.txt', 'a') as f:
-            upload_speed = wifi.upload() # a function to get the upload speed
-            download_speed = wifi.download() # a function to get the download speed
-            dt_now = datetime.now()  # using now function to get date and time now
-            dt_string = dt_now.strftime("%d/%m/%Y %H:%M:%S") # for formatting date and time
-            with redirect_stdout(f):
-                print(f"\nDate and Time: {dt_string} | Download speed: {download_speed / 1024 / 1024:.2f} Mbps | Upload speed: {upload_speed / 1024 / 1024:.2f} Mbps") # divid result by 1024 twice to get mega bit per second
+try:
+    def report_to_db():
+        while True:
+            with open('out.txt', 'a') as f:
+                upload_speed = wifi.upload() # a function to get the upload speed
+                download_speed = wifi.download() # a function to get the download speed
+                dt_now = datetime.now()  # using now function to get date and time now
+                dt_string = dt_now.strftime("%d/%m/%Y %H:%M:%S") # for formatting date and time
+                with redirect_stdout(f):
+                    print(f"\nDate and Time: {dt_string} | Download speed: {download_speed / 1024 / 1024:.2f} Mbps | Upload speed: {upload_speed / 1024 / 1024:.2f} Mbps") # divid result by 1024 twice to get mega bit per second
 
-schedule.every(2).hours.do(report_to_db)
+    schedule.every(1).minute.do(report_to_db)
 
-while 1:
-    schedule.run_pending()
-    time.sleep(1)
+    while 1:
+        schedule.run_pending()
+        time.sleep(1)
+except KeyboardInterrupt:
+    pass
+    print("You either quitted or your fat finger pressed the wrong button. Either way, you're out!")
+    quit()
