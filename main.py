@@ -39,7 +39,7 @@ print(f"\nUpload speed: {upload_speed / 1024 / 1024:.2f} Mbps") # divid result b
 print(f"\nPing result: {ping_result:.2f} ms") # have the .2 floor to ONLY two decimals at the .
 
 
-with open('out.txt', 'w') as f: #to print on start
+with open('out.txt', 'a') as f:
         with redirect_stdout(f):
             print(f"\nDate and Time: {dt_string} | Download speed: {download_speed / 1024 / 1024:.2f} Mbps | Upload speed: {upload_speed / 1024 / 1024:.2f} Mbps") # divid result by 1024 twice to get mega bit per second
 
