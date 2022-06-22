@@ -1,5 +1,4 @@
-# speedtester
-Very simple internet speed tester reliant on the "speedtest-cli" library
+#speedtester
 
 % python3 main.py
 
